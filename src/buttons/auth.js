@@ -1,4 +1,4 @@
-import Auth from "../models/auth.js";
+import Auth from "../models/Auth.js";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } from "discord.js" 
 import { generateCodeVerifier, generateCodeChallenge, generateAuthLink } from "../utils/twitter.js";
 
