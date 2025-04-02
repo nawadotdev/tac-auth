@@ -66,7 +66,7 @@ export default {
                     }
                 })
 
-                await interaction.member.roles.add("1356597001030074498")
+                await interaction.member.roles.add("1356991876544200745")
 
                 await i.editReply({
                     content: "Post added successfully",
