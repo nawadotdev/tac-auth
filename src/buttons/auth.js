@@ -19,7 +19,7 @@ export default {
 
         //create a unique state for the user, 16 char, all uppercase
         const state = Math.random().toString(36).substring(2, 18).toUpperCase();
-        const verifier = existingAuth ? existingAuth.verifier : generateCodeVerifier();
+        const verifier = generateCodeVerifier();
 
         //save the state to the db
         const preAuth = new Auth({
@@ -40,7 +40,7 @@ export default {
             embeds : [
                 new EmbedBuilder()
                 .setTitle("Authentication")
-                .setDescription("Instructions to authenticate with the bot")
+                .setDescription("Click on Authenticate and link your Discord with your X account")
             ],
             components : [
                 new ActionRowBuilder().addComponents(

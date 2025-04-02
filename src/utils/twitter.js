@@ -39,8 +39,9 @@ export const generateCodeChallenge = async (codeVerifier) => {
     return base64UrlEncode(sha256Hash);
 }
 
-export const generateAuthLink = (state, challange) => {
-    const authUrl = `https://x.com/i/oauth2/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=users.read%20tweet.read&state=${state}&code_challenge=${challange}&code_challenge_method=S256`
+export const generateAuthLink = (state, challange, redirectUri) => {
+    let redirect_uri = redirectUri || REDIRECT_URI;
+    const authUrl = `https://x.com/i/oauth2/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${redirect_uri}&scope=users.read%20tweet.read%20follows.read&state=${state}&code_challenge=${challange}&code_challenge_method=S256`
     return authUrl;
 }
 
