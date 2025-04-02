@@ -1,9 +1,10 @@
 import { createCanvas, loadImage } from "canvas";
 import { createImage } from "./image.js";
 import {ssim} from "ssim.js";
+import { writeFileSync } from "fs";
 
 export const checkPost = async (auth, link) => {
-
+    console.log(`Checking post ${link}`)
     const tweetId = getTweetId(link);
 
     if (!tweetId) {
@@ -25,29 +26,21 @@ export const checkPost = async (auth, link) => {
         return false
     }
 
-    const cardUrl = entry.content?.itemContent?.tweet_results?.result?.card?.rest_id
 
-    if (!cardUrl) {
-        console.log("No card url found")
+    const username = entry.content?.itemContent?.tweet_results?.result?.core?.user_results?.result?.legacy?.screen_name
+    const quoted = entry.content?.itemContent?.tweet_results?.result?.quoted_status_result?.result?.rest_id
+
+    if(!username || username !== auth.username) {
+        console.log("Invalid username")
         return false
     }
 
-    const redirectUrl = await getRedirectUrl(cardUrl)
-
-    if (!redirectUrl) {
-        console.log("No redirect url found")
+    if(!quoted || quoted !== "1825834801259229185"){
+        console.log("Invalid quoted tweet")
         return false
     }
 
-    const username = redirectUrl.split("=")[1]
-
-    if (username !== auth.username) {
-        console.log(username, auth.username)
-        return false
-    }
     return true
-
-
 }
 
 const getTweetId = link => {
