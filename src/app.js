@@ -61,7 +61,5 @@ client.on(Events.ClientReady, async (cl) => {
 // })
 
 connectDb().then(async () => {
-    //client.login(process.env.BOT_TOKEN)
-    const auth = await Auth.find()
-    console.log(auth.length)
+    client.login(process.env.BOT_TOKEN)
 })
