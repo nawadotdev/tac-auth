@@ -24,7 +24,7 @@ export default {
                 embeds: [
                     new EmbedBuilder()
                     .setTitle("TAC Aligned")
-                    .setDescription(`In order to be eligible for the TAC pilled campaign, please ensure you do the following:\n\n* ⁠Follow https://x.com/TacBuild\n*⁠ Click on ‘Authenticate’ and link your Discord and X account.\n* Click "Post on X" button.\n* Submit the link below and get the role 'Tac Aligned' role.`)
+                    .setDescription(`In order to be eligible for the TAC pilled campaign, please ensure you do the following:\n\n- ⁠Follow https://x.com/TacBuild \n- Click on ‘Authenticate’ and link your Discord and X account.\n- Click "Post on X" button.\n- Submit the link below and get the role 'Tac Aligned' role.`)
                     .setFooter({ text: "TAC.build ~ nawadotdev"})
                 ],
                 components: [row]
