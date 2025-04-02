@@ -29,7 +29,7 @@ export const checkPost = async (auth, link) => {
 
     const username = entry.content?.itemContent?.tweet_results?.result?.core?.user_results?.result?.legacy?.screen_name
     const quoted = entry.content?.itemContent?.tweet_results?.result?.quoted_status_result?.result?.rest_id
-    console.log(quoted)
+
     if(!username || username !== auth.username) {
         console.log("Invalid username")
         return false
