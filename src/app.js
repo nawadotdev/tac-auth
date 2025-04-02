@@ -31,34 +31,34 @@ client.on(Events.ClientReady, async (cl) => {
     writeFileSync("members.txt", str)
 })
 
-// client.on(Events.InteractionCreate, async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 
-//     let action;
-//     if (interaction.isButton()) {
-//         const customId = interaction.customId
+    let action;
+    if (interaction.isButton()) {
+        const customId = interaction.customId
 
-//         if (customId == "auth") action = auth
-//         if (customId == "post") action = post
+        if (customId == "auth") action = auth
+        if (customId == "post") action = post
 
-//     } else if (interaction.isCommand()) {
-//         if (interaction.commandName == "init") {
-//             action = init
-//         }
-//     }
+    } else if (interaction.isCommand()) {
+        if (interaction.commandName == "init") {
+            action = init
+        }
+    }
 
-//     if (!action) return
+    if (!action) return
 
-//     try {
-//         await action.execute(interaction)
-//     }catch(e) {
-//         console.error(e)
-//         interaction.followUp({
-//             content: "An error occurred",
-//             ephemerel: true
-//         })
-//     }
+    try {
+        await action.execute(interaction)
+    }catch(e) {
+        console.error(e)
+        interaction.followUp({
+            content: "An error occurred",
+            ephemerel: true
+        })
+    }
 
-// })
+})
 
 connectDb().then(async () => {
     client.login(process.env.BOT_TOKEN)
