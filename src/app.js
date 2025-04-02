@@ -20,15 +20,6 @@ client.on(Events.ClientReady, async (cl) => {
         await putCommands(cl.user.id)
     }
 
-    const guild = await cl.guilds.fetch("1313636846852640870")
-    const members = await guild.members.fetch()
-
-    let str = ""
-    members.forEach(member => {
-        str += `${member.user.id}\n`
-    })
-
-    writeFileSync("members.txt", str)
 })
 
 client.on(Events.InteractionCreate, async interaction => {
