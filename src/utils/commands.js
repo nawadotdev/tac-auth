@@ -10,11 +10,13 @@ export const putCommands = async (clientId) => {
         {
             name: "init",
             description: "Initialize the bot",
+            default_member_permissions: '8',
             type: 1
         },
         {
             name : "init2",
             description: "Initialize the bot",
+            default_member_permissions: '8',
             type: 1
         }
     ]
