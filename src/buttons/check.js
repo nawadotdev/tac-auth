@@ -18,36 +18,46 @@ export default {
             const isUserEarly = early(interaction.user?.id)
             const isUserAligned = member._roles?.includes(ALIGNED_ROLED_ID)
 
-            if(isUserEarly && isUserAligned){
-                if(!member._roles?.includes(EARLY_ROLE_ID)) {
+            if (isUserEarly && isUserAligned) {
+                if (!member._roles?.includes(EARLY_ROLE_ID)) {
                     await member.roles.add(EARLY_ROLE_ID)
                 }
                 return interaction.reply({
                     embeds: [
                         new EmbedBuilder()
-                        .setColor("Green")
-                        .setDescription(`Congrats, you were early + you have the <@&${ALIGNED_ROLED_ID}> role. Let your TAC Pilled journey begin.`)
-                        .setFooter({ text: "TAC.build ~ nawadotdev"})
+                            .setColor("Green")
+                            .setDescription(`Congrats, you were early + you have the <@&${ALIGNED_ROLED_ID}> role. Let your TAC Pilled journey begin.`)
+                            .setFooter({ text: "TAC.build ~ nawadotdev" })
                     ],
                     ephemeral: true
                 })
-            }else if(isUserEarly && !isUserAligned){
+            } else if (isUserEarly && !isUserAligned) {
                 return interaction.reply({
                     embeds: [
                         new EmbedBuilder()
-                        .setColor("Yellow")
-                        .setDescription(`Congrats, you were early but you haven't claimed the <@&${ALIGNED_ROLED_ID}> role. Get it here <#${ALIGNED_CHANNEL_ID}> and begin your journey. `)
-                        .setFooter({ text: "TAC.build ~ nawadotdev"})
+                            .setColor("Yellow")
+                            .setDescription(`Congrats, you were early but you haven't claimed the <@&${ALIGNED_ROLED_ID}> role. Get it here <#${ALIGNED_CHANNEL_ID}> and begin your journey. `)
+                            .setFooter({ text: "TAC.build ~ nawadotdev" })
                     ],
                     ephemeral: true
                 })
-            }else{
+            } else if (!isUserEarly && !isUserAligned) {
                 return interaction.reply({
                     embeds: [
                         new EmbedBuilder()
-                        .setColor("Red")
-                        .setDescription(`You weren't early enough to claim the 'Early' TAC role but you aren't late to kick start your Tac Pilled journey, claim the role: <#${ALIGNED_CHANNEL_ID}>`)
-                        .setFooter({ text: "TAC.build ~ nawadotdev"})
+                            .setColor("Red")
+                            .setDescription(`You weren't early enough to claim the 'Early' TAC role but you aren't late to kick start your Tac Pilled journey, claim the role: <#${ALIGNED_CHANNEL_ID}>`)
+                            .setFooter({ text: "TAC.build ~ nawadotdev" })
+                    ],
+                    ephemeral: true
+                })
+            } else {
+                return interaction.reply({
+                    embeds: [
+                        new EmbedBuilder()
+                            .setColor("Red")
+                            .setDescription(`Congrats! You have both <@&${ALIGNED_ROLED_ID}> role and <@&${EARLY_ROLE_ID}> role. Start creating TAC pilled content now asap!`)
+                            .setFooter({ text: "TAC.build ~ nawadotdev" })
                     ],
                     ephemeral: true
                 })
