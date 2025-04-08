@@ -15,7 +15,7 @@ export default {
             })
         }
 
-        const successfullAuth = await Auth.findOne({ userId: interaction.user.id, tweetUrl: { $exists: true } });
+        const successfullAuth = await Auth.findOne({ userId: interaction.user.id, tweetUrl: { $exists: true, $ne: null } });
         const userHasRole = interaction.member._roles?.includes("1356991876544200745")
         if (successfullAuth && userHasRole) {
             return interaction.reply({
