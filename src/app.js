@@ -8,6 +8,7 @@ import check from "./buttons/check.js"
 import init from "./commands/init.js"
 import init2 from "./commands/init2.js"
 import Auth from "./models/auth.js"
+import early from "./utils/early.js"
 
 const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers]
