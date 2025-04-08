@@ -16,11 +16,19 @@ export default {
         }
 
         const successfullAuth = await Auth.findOne({ userId: interaction.user.id, tweetUrl: { $exists: true } });
-
-        if (successfullAuth) {
+        const userHasRole = interaction.member._roles?.includes("1356991876544200745")
+        if (successfullAuth && userHasRole) {
             return interaction.reply({
                 content: "You've already submitted a post",
                 ephemeral: true
+            })
+        }
+
+        if (successfullAuth && !userHasRole) {
+            await Auth.findByIdAndUpdate(successfullAuth._id, {
+                $set: {
+                    tweetUrl: null
+                }
             })
         }
 
