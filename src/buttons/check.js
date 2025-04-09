@@ -46,7 +46,7 @@ export default {
                     embeds: [
                         new EmbedBuilder()
                             .setColor("Red")
-                            .setDescription(`You weren't early enough to claim the 'Early' TAC role but you aren't late to kick start your Tac Pilled journey, claim the role: <#${ALIGNED_CHANNEL_ID}>`)
+                            .setDescription(`You weren't early enough to claim the <@&${EARLY_ROLE_ID}> role but you aren't late to kick start your Tac Pilled journey, claim the role: <#${ALIGNED_CHANNEL_ID}>`)
                             .setFooter({ text: "TAC.build ~ nawadotdev" })
                     ],
                     ephemeral: true
@@ -56,7 +56,7 @@ export default {
                     embeds: [
                         new EmbedBuilder()
                             .setColor("Red")
-                            .setDescription(`You weren't early enough to claim the 'Early' role but you are eligible to participate in the TAC pilled campaign as you are <@&${ALIGNED_ROLED_ID}>. Start creating content related to TAC on X asap!`)
+                            .setDescription(`You weren't early enough to claim the <@&${EARLY_ROLE_ID}> role but you are eligible to participate in the TAC pilled campaign as you are <@&${ALIGNED_ROLED_ID}>. Start creating content related to TAC on X asap!`)
                             .setFooter({ text: "TAC.build ~ nawadotdev" })
                     ],
                     ephemeral: true
