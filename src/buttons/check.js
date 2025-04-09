@@ -56,7 +56,7 @@ export default {
                     embeds: [
                         new EmbedBuilder()
                             .setColor("Red")
-                            .setDescription(`Congrats! You have both <@&${ALIGNED_ROLED_ID}> role and <@&${EARLY_ROLE_ID}> role. Start creating TAC pilled content now asap!`)
+                            .setDescription(`You weren't early enough to claim the 'Early' role but you are eligible to participate in the TAC pilled campaign as you are <@&${ALIGNED_ROLED_ID}>. Start creating content related to TAC on X asap!`)
                             .setFooter({ text: "TAC.build ~ nawadotdev" })
                     ],
                     ephemeral: true

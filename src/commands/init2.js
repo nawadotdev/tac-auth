@@ -22,7 +22,7 @@ export default {
                 embeds: [
                     new EmbedBuilder()
                     .setTitle("TAC Pilled Campaign: Early Role Claim")
-                    .setDescription(`Early members form the core community so we want to award a small multiplier to such members. Please use the checker below to claim the role.\n\nNote: These Discord roles are multipliers and will be applicable only on top of the base KAITO score. Please ensure you are active on X and have claimed the TAC aligned (<#${ALIGNED_CHANNEL_ID}>) role.`)
+                    .setDescription(`Early members form the core community so we want to award a small multiplier to such members. Please use the checker below to claim the role.\n\n**Note**: Discord roles are multipliers and will be applicable only on top of the base KAITO score. Please ensure you are active on X and have claimed the TAC aligned (<#${ALIGNED_CHANNEL_ID}>) role.`)
                     .setFooter({ text: "TAC.build ~ nawadotdev"})
                 ],
                 components: [row]
