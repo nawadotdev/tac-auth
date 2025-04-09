@@ -39,7 +39,7 @@ export default {
                     embeds: [
                         new EmbedBuilder()
                             .setColor("Yellow")
-                            .setDescription(`Congrats, you received the <@&${EARLY_ROLE_ID}> role for but you haven't claimed the <@&${ALIGNED_ROLED_ID}> role. Get it here <#${ALIGNED_CHANNEL_ID}> and begin your journey. `)
+                            .setDescription(`Congrats, you received the <@&${EARLY_ROLE_ID}> role but you haven't claimed the <@&${ALIGNED_ROLED_ID}> role. Get it here <#${ALIGNED_CHANNEL_ID}> and begin your journey. `)
                             .setFooter({ text: "TAC.build ~ nawadotdev" })
                     ],
                     ephemeral: true
