@@ -32,11 +32,14 @@ export default {
                     ephemeral: true
                 })
             } else if (isUserEarly && !isUserAligned) {
+                if (!member._roles?.includes(EARLY_ROLE_ID)) {
+                    await member.roles.add(EARLY_ROLE_ID)
+                }
                 return interaction.reply({
                     embeds: [
                         new EmbedBuilder()
                             .setColor("Yellow")
-                            .setDescription(`Congrats, you were early but you haven't claimed the <@&${ALIGNED_ROLED_ID}> role. Get it here <#${ALIGNED_CHANNEL_ID}> and begin your journey. `)
+                            .setDescription(`Congrats, you received the <@&${EARLY_ROLE_ID}> for being early but you haven't claimed the <@&${ALIGNED_ROLED_ID}> role. Get it here <#${ALIGNED_CHANNEL_ID}> and begin your journey. `)
                             .setFooter({ text: "TAC.build ~ nawadotdev" })
                     ],
                     ephemeral: true
