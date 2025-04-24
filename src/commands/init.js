@@ -17,7 +17,11 @@ export default {
                 new ButtonBuilder()
                     .setCustomId("post")
                     .setLabel("Post Proof")
-                    .setStyle(ButtonStyle.Primary)
+                    .setStyle(ButtonStyle.Primary),
+                new ButtonBuilder()
+                    .setCustomId("unlink")
+                    .setLabel("Unlink Account")
+                    .setStyle(ButtonStyle.Danger),
             )
 
             await interaction.reply({
