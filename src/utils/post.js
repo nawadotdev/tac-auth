@@ -1,7 +1,7 @@
 import { createCanvas, loadImage } from "canvas";
 import { createImage } from "./image.js";
-import {ssim} from "ssim.js";
-import { writeFileSync } from "fs";
+import { ssim } from "ssim.js";
+import { write, writeFileSync } from "fs";
 
 export const checkPost = async (auth, link) => {
     console.log(`Checking post ${link}`)
@@ -30,12 +30,12 @@ export const checkPost = async (auth, link) => {
     const username = entry.content?.itemContent?.tweet_results?.result?.core?.user_results?.result?.legacy?.screen_name
     const quoted = entry.content?.itemContent?.tweet_results?.result?.quoted_status_result?.result?.rest_id
 
-    if(!username || username !== auth.username) {
+    if (!username || username !== auth.username) {
         console.log("Invalid username")
         return false
     }
 
-    if(!quoted || quoted !== "1907548455779840058"){
+    if (!quoted || quoted !== "1907548455779840058") {
         console.log("Invalid quoted tweet")
         return false
     }
@@ -91,5 +91,47 @@ const getRedirectUrl = async (url) => {
     const resp = await fetch(url)
 
     return resp.url
+
+}
+
+export const checkRiddlePost = async (username, link) => {
+
+    console.log(`Checking post ${link}`)
+    const tweetId = getTweetId(link);
+
+    if (!tweetId) {
+        console.log("Invalid tweet link")
+        return false
+    }
+
+    const tweet = await getTweet(tweetId)
+    const entries = tweet?.data?.threaded_conversation_with_injections_v2?.instructions?.[0]?.entries
+
+    if (!entries) {
+        console.log("No entries found")
+        return false
+    }
+
+    const entry = entries.find(entry => entry.entryId === `tweet-${tweetId}`)
+    if (!entry) {
+        console.log("No entry found")
+        return false
+    }
+
+    writeFileSync("./tweet.json", JSON.stringify(entry, null, 2))
+
+    const expandedUrl = entry.content?.itemContent?.tweet_results?.result?.legacy?.entities?.urls[0]?.expanded_url
+    if (!expandedUrl) {
+        console.log("No expanded url found")
+        return false
+    }
+
+    if(!expandedUrl.includes(`https://link.tac.build/api/riddle-card?username=${username}`)) {
+        console.log("Invalid expanded url")
+        return false
+    }
+
+    return true
+
 
 }
