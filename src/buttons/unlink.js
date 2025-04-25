@@ -21,7 +21,7 @@ export default {
 
             await member.roles.remove(ALIGNED_ROLED_ID) 
 
-            await Auth.deleteMany({ interactionId: interaction.user.id })
+            await Auth.deleteMany({ userId: interaction.user.id })
             await interaction.editReply({
                 content: `You have been unlinked your account and lost <@&${ALIGNED_ROLED_ID}>. Redo all the steps to get it back.`,
                 ephemeral: true
