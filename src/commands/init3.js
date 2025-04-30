@@ -43,7 +43,26 @@ export default {
                         .addFields(
                             {
                                 name: "How To Play",
-                                value: `1️⃣ Read both the riddles carefully.\n2️⃣ Once the answers are ready, click the ‘🎮Submit Answer’ button. \n3️⃣ Enter your answers in the appropriate input box and click ‘Submit.’\n4️⃣ Not happy with your attempt? Click ‘🎮 Submit Answer’ button again to re-submit your answers.\nYou can take up to 5 attempts by following the same process.\nBoth of your submitted answers must be correct in the respective attempt to win the easter hunt. ✅\nSay you get Riddle #1 right, but answer Riddle #2 incorrectly in the same attempt. Such an attempt won’t count as a win. 🚫\n5️⃣ To review answers for any attempt, click the ‘Show Answers’ button.
+                                value: 
+`
+1️⃣ Read both the riddles carefully.
+
+2️⃣ Once the answers are ready, click the ‘🎮Submit Answer’ button. 
+
+3️⃣ Enter your answers in the appropriate input box and click ‘Submit.’
+
+4️⃣ Not happy with your attempt? Click ‘🎮 Submit Answer’ button again to re-submit your answers. 
+**You can take up to 10 attempts:**
+-5 attempts if you answer both Riddles at once
+-10 attempts (5 attempts per Riddle) if you answer 1 Riddle in one attempt. 
+
+**Either way, you only get a total of 5 guesses per Riddle.**
+
+5️⃣ Answer correctly and earn a total of 500 XP. You get 250 XP per correct Riddle answer. 
+
+6️⃣ To review answers for your most recent attempt, click the ‘Show Answers’ button.
+
+7️⃣The contest ends on XXX.
 `
                             },
                             {

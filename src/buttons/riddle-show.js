@@ -5,12 +5,10 @@ export default {
     customId: "riddle-show",
     execute : async interaction => {
 
-        const userRiddle1Answers = await RiddleUser.find({ userId: interaction.user.id, riddleId: 1 }).sort({ createdAt: -1 })
-        const latestAnswer = userRiddle1Answers[0]?.riddleAnswer
+        const userRiddle1Answers = await RiddleUser.find({ userId: interaction.user.id, riddleId: 1 })
         const userRiddle2Answers = await RiddleUser.find({ userId: interaction.user.id, riddleId: 2 })
-        const latestAnswer2 = userRiddle2Answers[0]?.riddleAnswer
 
-        if(userRiddle1Answers == null && userRiddle2Answers == null) {
+        if(userRiddle1Answers.length == 0 && userRiddle2Answers.length == 0) {
             return await interaction.reply({
                 content: "You haven't submitted any answers yet",
                 ephemeral: true
@@ -22,12 +20,12 @@ export default {
         .setColor("#00FF00")
         .setFooter({ text: "TAC.build ~ nawadotdev" })
 
-        if(latestAnswer) {
-            embed.addFields({ name: "Riddle 1", value: `${latestAnswer}` })
+        if(userRiddle1Answers.length) {
+            embed.addFields({ name: "Riddle 1", value: `${userRiddle1Answers.map(answer => (`- ${answer.riddleAnswer}`)).join("\n")}` })
         }
 
-        if(userRiddle2Answers) {
-            embed.addFields({ name: "Riddle 2", value: `${latestAnswer2}` })
+        if(userRiddle2Answers.length) {
+            embed.addFields({ name: "Riddle 2", value: `${userRiddle2Answers.map(answer => (`- ${answer.riddleAnswer}`)).join("\n")}` })
         }
 
         await interaction.reply({

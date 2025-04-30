@@ -10,7 +10,7 @@ const riddleUserSchema = new Schema({
         required: true
     },
     riddleAnswer: {
-        type: Number,
+        type: String,
         required: true
     }
 }, {
