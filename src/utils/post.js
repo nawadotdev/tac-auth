@@ -13,7 +13,7 @@ export const checkPost = async (auth, link) => {
     }
 
     const tweet = await getTweet(tweetId)
-    const entries = tweet?.data?.threaded_conversation_with_injections_v2?.instructions?.[0]?.entries
+    const entries = tweet?.data?.threaded_conversation_with_injections_v2?.instructions?.[0]?.entries || tweet?.data?.threaded_conversation_with_injections_v2?.instructions?.[1]?.entries
 
     if (!entries) {
         console.log("No entries found")
@@ -58,7 +58,7 @@ const accountOptions = [
 ]
 
 let lastChar = 65
-const getTweet = async (tweetId, currentAccount = 0) => {
+export const getTweet = async (tweetId, currentAccount = 0) => {
 
     while (currentAccount < accountOptions.length) {
         var account = accountOptions[currentAccount]
