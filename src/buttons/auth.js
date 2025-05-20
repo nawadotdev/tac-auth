@@ -15,7 +15,7 @@ export default {
             })
         }
 
-        await Auth.deleteMany({userId : interaction.user.id});
+        //await Auth.deleteMany({userId : interaction.user.id});
 
         //create a unique state for the user, 16 char, all uppercase
         const state = Math.random().toString(36).substring(2, 18).toUpperCase();
