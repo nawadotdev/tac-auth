@@ -31,12 +31,12 @@ export const checkPost = async (auth, link) => {
     const quoted = entry.content?.itemContent?.tweet_results?.result?.quoted_status_result?.result?.rest_id
 
     if (!username || username !== auth.username) {
-        console.log("Invalid username")
+        console.log(`Invalid username ${username} != ${auth.username}`)
         return false
     }
 
     if (!quoted || quoted !== "1907548455779840058") {
-        console.log("Invalid quoted tweet")
+        console.log(`Invalid quoted tweet ${quoted} != 1907548455779840058`)
         return false
     }
 

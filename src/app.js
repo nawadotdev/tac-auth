@@ -18,23 +18,54 @@ import { checkRiddlePost } from "./utils/post.js"
 import riddleAnswer from "./buttons/riddle-answer.js"
 import riddleShow from "./buttons/riddle-show.js"
 import unlink from "./buttons/unlink.js"
+import xp from "./commands/xp.js"
+import rank from "./commands/rank.js"
+import { writeFileSync } from "fs"
 
 const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers]
 })
 
+const _commands = [
+    {
+        name: "init",
+        description: "Initialize the bot",
+        default_member_permissions: '8',
+        type: 1
+    },
+    {
+        name: "init2",
+        description: "Initialize the bot",
+        default_member_permissions: '8',
+        type: 1
+    },
+    {
+        name: "init3",
+        description: "Initialize the bot",
+        default_member_permissions: '8',
+        type: 1
+    },
+    xp.command.toJSON(),
+    rank.command.toJSON()
+]
+
 client.on(Events.ClientReady, async (cl) => {
     console.log(`Logged in as ${cl.user.tag}`)
 
     const commands = await getCommands(cl.user.id)
-    if (!commands?.find(command => command.name == "init") || !commands?.find(command => command.name == "init2") || !commands?.find(command => command.name == "init3")) {
-        await putCommands(cl.user.id)
+    if (commands.length != _commands.length) {
+        await putCommands(cl.user.id, _commands)
     }
+
+    //await putCommands(cl.user.id, _commands)
+
+    // const guild = await cl.guilds.fetch("1313636846852640870")
+    // const members = await guild.members.fetch()
 
 })
 
 client.on(Events.InteractionCreate, async interaction => {
-
+    console.log(`Interaction: ${interaction.customId || interaction.commandName} by ${interaction.user.username} in ${interaction.guild.name} @ ${new Date().toISOString()}`)
     let action;
     if (interaction.isButton()) {
         const customId = interaction.customId
@@ -53,15 +84,12 @@ client.on(Events.InteractionCreate, async interaction => {
         if (customId == "riddle-show") action = riddleShow
 
     } else if (interaction.isCommand()) {
-        if (interaction.commandName == "init") {
-            action = init
-        } else if (interaction.commandName == "init2") {
-            action = init2
-        }
-
         if (interaction.commandName == "init") action = init
         if (interaction.commandName == "init2") action = init2
         if (interaction.commandName == "init3") action = init3
+
+        if (interaction.commandName == "xp") action = xp
+        if (interaction.commandName == "rank") action = rank
     }
 
     if (!action) return
