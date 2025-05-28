@@ -42,7 +42,7 @@ export default {
         })
 
         setTimeout(async () => {
-            interaction.reply({
+            interaction.editReply({
                 embeds: [
                     new EmbedBuilder()
                         .setTitle("Authentication")
