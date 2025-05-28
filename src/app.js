@@ -57,7 +57,7 @@ client.on(Events.ClientReady, async (cl) => {
         await putCommands(cl.user.id, _commands)
     }
 
-    //await putCommands(cl.user.id, _commands)
+    await putCommands(cl.user.id, _commands)
 
     // const guild = await cl.guilds.fetch("1313636846852640870")
     // const members = await guild.members.fetch()
