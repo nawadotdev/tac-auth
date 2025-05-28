@@ -45,8 +45,8 @@ const _commands = [
         default_member_permissions: '8',
         type: 1
     },
-    // xp.command.toJSON(),
-    // rank.command.toJSON()
+    xp.command.toJSON(),
+    rank.command.toJSON()
 ]
 
 client.on(Events.ClientReady, async (cl) => {
