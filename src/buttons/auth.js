@@ -37,7 +37,7 @@ export default {
 
         //redirect the user to the auth page
         await interaction.reply({
-            content: "Yoru authenticaion link is being generated, please wait...",
+            content: "Your authenticaion link is being generated, please wait...",
             ephemeral: true
         })
 
