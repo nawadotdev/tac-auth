@@ -1,17 +1,17 @@
 import Auth from "../models/auth.js";
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } from "discord.js" 
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } from "discord.js"
 import { generateCodeVerifier, generateCodeChallenge, generateAuthLink } from "../utils/twitter.js";
 
 export default {
-    customId : "auth",
-    execute : async interaction => {
+    customId: "auth",
+    execute: async interaction => {
 
         //check user's pre auth requests, if there's any successfull auth, return
-        const existingAuth = await Auth.findOne({userId : interaction.user.id, tweetUrl : { $exists : true }});
-        if(existingAuth) {
+        const existingAuth = await Auth.findOne({ userId: interaction.user.id, tweetUrl: { $exists: true } });
+        if (existingAuth) {
             return interaction.reply({
-                content : "You're already authenticated",
-                ephemeral : true
+                content: "You're already authenticated",
+                ephemeral: true
             })
         }
 
@@ -36,22 +36,29 @@ export default {
         const authLink = generateAuthLink(state, challenge);
 
         //redirect the user to the auth page
-        interaction.reply({
-            embeds : [
-                new EmbedBuilder()
-                .setTitle("Authentication")
-                .setDescription("Click on Authenticate and link your Discord with your X account")
-            ],
-            components : [
-                new ActionRowBuilder().addComponents(
-                    new ButtonBuilder()
-                    .setStyle(ButtonStyle.Link)
-                    .setLabel("Authenticate!")
-                    .setURL(authLink)
-                )
-            ],
-            ephemeral : true
+        await interaction.reply({
+            content: "Yoru authenticaion link is being generated, please wait...",
+            ephemeral: true
         })
+
+        setTimeout(async () => {
+            interaction.reply({
+                embeds: [
+                    new EmbedBuilder()
+                        .setTitle("Authentication")
+                        .setDescription("Click on Authenticate and link your Discord with your X account")
+                ],
+                components: [
+                    new ActionRowBuilder().addComponents(
+                        new ButtonBuilder()
+                            .setStyle(ButtonStyle.Link)
+                            .setLabel("Authenticate!")
+                            .setURL(authLink)
+                    )
+                ],
+                ephemeral: true
+            })
+        }, 10 * 1000)
 
     }
 }
