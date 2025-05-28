@@ -2,6 +2,9 @@ import { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } from
 import Auth from "../models/auth.js";
 import { checkPost } from "../utils/post.js"
 
+const ALIGNED_ROLED_ID = "1356991876544200745"
+
+
 export default {
     customId: "post",
     execute: async interaction => {
@@ -16,7 +19,7 @@ export default {
         }
 
         const successfullAuth = await Auth.findOne({ userId: interaction.user.id, tweetUrl: { $exists: true, $ne: null } });
-        const userHasRole = interaction.member._roles?.includes("1356991876544200745")
+        const userHasRole = interaction.member._roles?.includes(ALIGNED_ROLED_ID)
         if (successfullAuth && userHasRole) {
             return interaction.reply({
                 content: "You've already submitted a post",
@@ -74,10 +77,10 @@ export default {
                     }
                 })
 
-                await interaction.member.roles.add("1356991876544200745")
+                await interaction.member.roles.add(ALIGNED_ROLED_ID)
 
                 await i.editReply({
-                    content: "Post added successfully",
+                    content: `Post added successfully, you have been granted the <@&${ALIGNED_ROLED_ID}> role`,
                     ephemeral: true
                 })
             } catch (err) {
