@@ -390,7 +390,7 @@ async function sendLeaderboard(interaction, page = 0, update = false) {
   embed.addFields(
     { name: "Rank", value: ranks.join("\n"), inline: true },
     { name: "User", value: userMentions.join("\n"), inline: true },
-    { name: "XP", value: xps.join("\n"), inline: true }
+    { name: "Snaps", value: xps.join("\n"), inline: true }
   )
   embed.setFooter({ text: `TAC.build ~ nawadotdev` })
 
