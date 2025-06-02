@@ -23,7 +23,7 @@ import rank from "./commands/rank.js"
 import { writeFileSync } from "fs"
 
 const client = new Client({
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers]
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessageReactions]
 })
 
 const _commands = [
@@ -59,8 +59,9 @@ client.on(Events.ClientReady, async (cl) => {
 
     await putCommands(cl.user.id, _commands)
 
-    // const guild = await cl.guilds.fetch("1313636846852640870")
+    const guild = await cl.guilds.fetch("1313636846852640870")
     // const members = await guild.members.fetch()
+
 
 })
 

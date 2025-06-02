@@ -4,7 +4,7 @@ import UserXp from "../models/userxp.js";
 export default {
     command : new SlashCommandBuilder()
         .setName("rank")
-        .setDescription("Check your rank"),
+        .setDescription("Check your rank and snaps"),
     execute : async interaction => {
 
         try{
@@ -13,7 +13,7 @@ export default {
             
             if(!userXp){
                 return interaction.reply({
-                    content : "You haven't earned any XP yet.",
+                    content : "You haven't earned any snaps yet.",
                     ephemeral : true
                 })
             }
@@ -30,7 +30,7 @@ export default {
                             inline : true
                         },
                         {
-                            name : "XP",
+                            name : "Snaps",
                             value : `**${userXp.xp}**`,
                             inline : true
                         }

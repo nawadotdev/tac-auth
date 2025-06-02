@@ -374,10 +374,9 @@ async function sendLeaderboard(interaction, page = 0, update = false) {
   }
 
   const embed = new EmbedBuilder()
-    .setTitle("XP Leaderboard")
-    .setColor(0xFFD700); // Sarı renk hex (Gold)
+    .setTitle("TAC Force Board")
+    .setColor(0xFFD700); 
 
-  // 3 farklı field için array oluşturuyoruz
   const ranks = [];
   const userMentions = [];
   const xps = [];
