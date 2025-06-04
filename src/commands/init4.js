@@ -17,6 +17,13 @@ export default {
             )
 
             await interaction.reply({
+                embeds: [
+                    new EmbedBuilder()
+                        .setColor(0x0099ff)
+                        .setTitle("TAC Force Board")
+                        .setDescription("Please click on the ‘Check Rank’ button below to know your rank in the TAC Force Board.\n\nNot all Discord activities earn ‘Snaps’. Read this for more #info about the TAC Snaps initiative.")
+                        .setFooter({ text: "TAC.build ~ nawadotdev"})
+                ],
                 components: [row]
             })
 

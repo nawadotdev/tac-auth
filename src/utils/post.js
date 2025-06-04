@@ -3,7 +3,7 @@ import { createImage } from "./image.js";
 import { ssim } from "ssim.js";
 import { write, writeFileSync } from "fs";
 
-export const checkPost = async (auth, link) => {
+export const    checkPost = async (auth, link) => {
     console.log(`Checking post ${link}`)
     const tweetId = getTweetId(link);
 
