@@ -22,6 +22,7 @@ import xp from "./commands/xp.js"
 import rank from "./commands/rank.js"
 import { writeFileSync } from "fs"
 import init4 from "./commands/init4.js"
+import checkRank from "./buttons/check-rank.js"
 
 const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessageReactions]
@@ -91,6 +92,8 @@ client.on(Events.InteractionCreate, async interaction => {
         if (customId == "riddle-answer") action = riddleAnswer
         if (customId == "riddle-show") action = riddleShow
 
+        if (customId == "check-rank") action = checkRank
+
     } else if (interaction.isCommand()) {
         if (interaction.commandName == "init") action = init
         if (interaction.commandName == "init2") action = init2
@@ -99,6 +102,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
         if (interaction.commandName == "xp") action = xp
         if (interaction.commandName == "rank") action = rank
+
     }
 
     if (!action) return
