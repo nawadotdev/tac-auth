@@ -21,6 +21,7 @@ import unlink from "./buttons/unlink.js"
 import xp from "./commands/xp.js"
 import rank from "./commands/rank.js"
 import { writeFileSync } from "fs"
+import init4 from "./commands/init4.js"
 
 const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessageReactions]
@@ -88,6 +89,7 @@ client.on(Events.InteractionCreate, async interaction => {
         if (interaction.commandName == "init") action = init
         if (interaction.commandName == "init2") action = init2
         if (interaction.commandName == "init3") action = init3
+        if (interaction.commandName == "init4") action = init4
 
         if (interaction.commandName == "xp") action = xp
         if (interaction.commandName == "rank") action = rank
