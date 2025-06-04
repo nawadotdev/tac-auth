@@ -46,6 +46,12 @@ const _commands = [
         default_member_permissions: '8',
         type: 1
     },
+    {
+        name: "init4",
+        description: "Initialize the bot",
+        default_member_permissions: '8',
+        type: 1
+    },
     xp.command.toJSON(),
     rank.command.toJSON()
 ]
