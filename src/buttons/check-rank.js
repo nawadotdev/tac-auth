@@ -7,7 +7,6 @@ export default {
 
         try {
             const userXp = await UserXp.findOne({ userId: interaction.user.id });
-            const rank = await UserXp.countDocuments({ xp: { $gt: userXp.xp } }) + 1;
 
             if (!userXp) {
                 return interaction.reply({
@@ -15,6 +14,8 @@ export default {
                     ephemeral: true
                 })
             }
+
+            const rank = await UserXp.countDocuments({ xp: { $gt: userXp.xp } }) + 1;
 
             await interaction.reply({
                 embeds: [
