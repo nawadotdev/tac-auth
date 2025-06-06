@@ -5,7 +5,7 @@ import UserXp from "../models/userxp.js";
 export default {
     command: new SlashCommandBuilder()
         .setName("xp")
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+        //.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .setDescription("Manage XP")
         .addSubcommandGroup(group => group
             .setName("individual")

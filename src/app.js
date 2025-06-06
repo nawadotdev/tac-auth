@@ -23,9 +23,10 @@ import rank from "./commands/rank.js"
 import { writeFileSync } from "fs"
 import init4 from "./commands/init4.js"
 import checkRank from "./buttons/check-rank.js"
+import VoiceTime from "./models/voiceTime.js"
 
 const client = new Client({
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessageReactions]
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.GuildVoiceStates]
 })
 
 const _commands = [
@@ -115,6 +116,38 @@ client.on(Events.InteractionCreate, async interaction => {
             content: "An error occurred",
             ephemeral: true
         }).catch(() => { })
+    }
+
+})
+
+const voiceJoinedAt = new Map()
+
+client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
+
+    if(oldState.channelId == newState.channelId) return
+
+    if(newState.channelId){
+        voiceJoinedAt.set(`${newState.member.id}-${newState.channelId}`, Date.now())
+    }
+
+    if(oldState.channelId){
+        const joinedAt = voiceJoinedAt.get(`${oldState.member.id}-${oldState.channelId}`)
+        if(!joinedAt) return
+        const time = Date.now() - joinedAt
+        console.log(`${oldState.member.user} spent ${time}ms in the stage`)
+        const voiceTime = await VoiceTime.findOneAndUpdate({
+            userId: oldState.member.id,
+            channelId: oldState.channelId
+        }, {
+            $inc: {
+                voiceTime: time
+            }
+        }, {
+            upsert: true,
+            new: true
+        })
+        console.log(voiceTime)
+        voiceJoinedAt.delete(`${oldState.member.id}-${oldState.channelId}`)
     }
 
 })
