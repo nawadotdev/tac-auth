@@ -24,6 +24,7 @@ import { writeFileSync } from "fs"
 import init4 from "./commands/init4.js"
 import checkRank from "./buttons/check-rank.js"
 import VoiceTime from "./models/voiceTime.js"
+import VoiceJoinTime from "./models/voiceJoinTime.js"
 
 const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.GuildVoiceStates]
@@ -120,20 +121,31 @@ client.on(Events.InteractionCreate, async interaction => {
 
 })
 
-const voiceJoinedAt = new Map()
 
 client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
-
+    if(!newState.member || !oldState.member ) return
     if(oldState.channelId == newState.channelId) return
 
     if(newState.channelId){
-        voiceJoinedAt.set(`${newState.member.id}-${newState.channelId}`, Date.now())
+        const voiceJoinTime = await VoiceJoinTime.findOneAndUpdate({
+            userId: newState.member.id,
+            channelId: newState.channelId
+        }, {
+            $set: {
+                joinTime: Date.now()
+            }
+        }, {
+            upsert: true
+        })
     }
 
     if(oldState.channelId){
-        const joinedAt = voiceJoinedAt.get(`${oldState.member.id}-${oldState.channelId}`)
-        if(!joinedAt) return
-        const time = Date.now() - joinedAt
+        const voiceJoinTime = await VoiceJoinTime.findOne({
+            userId: oldState.member.id,
+            channelId: oldState.channelId
+        })
+        if(!voiceJoinTime) return
+        const time = Date.now() - voiceJoinTime.joinTime
         console.log(`${oldState.member.user} spent ${time}ms in the stage`)
         const voiceTime = await VoiceTime.findOneAndUpdate({
             userId: oldState.member.id,
@@ -146,8 +158,6 @@ client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
             upsert: true,
             new: true
         })
-        console.log(voiceTime)
-        voiceJoinedAt.delete(`${oldState.member.id}-${oldState.channelId}`)
     }
 
 })
