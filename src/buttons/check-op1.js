@@ -1,4 +1,4 @@
-import UserWallet from "../models/userwallet.js"
+import UserWallet from "../models/userWallet.js"
 
 export default {
     customId: "check-op1",

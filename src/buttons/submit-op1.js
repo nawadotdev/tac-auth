@@ -1,5 +1,5 @@
 import { ActionRowBuilder, ButtonStyle, ModalBuilder, TextInputBuilder, TextInputStyle } from "discord.js"
-import UserWallet from "../models/userwallet.js";
+import UserWallet from "../models/userWallet.js";
 
 export default {
     customId: "submit-op1",
