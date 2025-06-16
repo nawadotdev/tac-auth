@@ -20,11 +20,15 @@ import riddleShow from "./buttons/riddle-show.js"
 import unlink from "./buttons/unlink.js"
 import xp from "./commands/xp.js"
 import rank from "./commands/rank.js"
-import { writeFileSync } from "fs"
+import { readFileSync, writeFileSync } from "fs"
 import init4 from "./commands/init4.js"
 import checkRank from "./buttons/check-rank.js"
 import VoiceTime from "./models/voiceTime.js"
 import VoiceJoinTime from "./models/voiceJoinTime.js"
+import UserXp from "./models/userxp.js"
+import init5 from "./commands/init5.js"
+import submitOp1 from "./buttons/submit-op1.js"
+import checkOp1 from "./buttons/check-op1.js"
 
 const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.GuildVoiceStates]
@@ -55,6 +59,12 @@ const _commands = [
         default_member_permissions: '8',
         type: 1
     },
+    {
+        name: "init5",
+        description: "Initialize the bot",
+        default_member_permissions: '8',
+        type: 1
+    },
     xp.command.toJSON(),
     rank.command.toJSON()
 ]
@@ -70,7 +80,8 @@ client.on(Events.ClientReady, async (cl) => {
     await putCommands(cl.user.id, _commands)
 
     const guild = await cl.guilds.fetch("1313636846852640870")
-    // const members = await guild.members.fetch()
+    const members = await guild.members.fetch()
+
 
 
 })
@@ -96,11 +107,15 @@ client.on(Events.InteractionCreate, async interaction => {
 
         if (customId == "check-rank") action = checkRank
 
-    } else if (interaction.isCommand()) {
+        if (customId == "submit-op1") action = submitOp1
+        if (customId == "check-op1") action = checkOp1
+
+        } else if (interaction.isCommand()) {
         if (interaction.commandName == "init") action = init
         if (interaction.commandName == "init2") action = init2
         if (interaction.commandName == "init3") action = init3
         if (interaction.commandName == "init4") action = init4
+        if (interaction.commandName == "init5") action = init5
 
         if (interaction.commandName == "xp") action = xp
         if (interaction.commandName == "rank") action = rank
@@ -157,6 +172,9 @@ client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
         }, {
             upsert: true,
             new: true
+        })
+        await VoiceJoinTime.findOneAndDelete({
+            _id: voiceJoinTime._id
         })
     }
 
