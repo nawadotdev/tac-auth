@@ -79,24 +79,6 @@ client.on(Events.ClientReady, async (cl) => {
 
     await putCommands(cl.user.id, _commands)
 
-    const guild = await cl.guilds.fetch("1313636846852640870")
-    const members = await guild.members.fetch()
-
-    const missingIds = JSON.parse(readFileSync(`./ids.json`, "utf-8"))
-
-    for(const id of missingIds){
-        const member = members.get(id)
-        if(!member) continue
-        if(member.roles.cache.has("1384129815535288442")) continue
-        else{
-            const userxp = await UserXp.findOne({ userId: id })
-            if(!userxp) continue
-            if(userxp.xp < 50) continue
-            await member.roles.add("1384129815535288442")
-            console.log(`${member.user.username} added to the role`)
-        }
-    }
-
 
 
 })
