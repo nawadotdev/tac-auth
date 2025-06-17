@@ -9,6 +9,8 @@ export default {
         const member = interaction.member
         if (!member) return
 
+        await Auth.deleteMany({ userId: interaction.user.id })
+
         if(!member._roles.includes(ALIGNED_ROLED_ID)){
             return await interaction.reply({
                 content: "You don't have the aligned role",
