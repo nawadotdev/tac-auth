@@ -83,55 +83,55 @@ client.on(Events.ClientReady, async (cl) => {
 
 })
 
-// client.on(Events.InteractionCreate, async interaction => {
-//     console.log(`Interaction: ${interaction.customId || interaction.commandName} by ${interaction.user.username} in ${interaction.guild.name} @ ${new Date().toISOString()}`)
-//     let action;
-//     if (interaction.isButton()) {
-//         const customId = interaction.customId
+client.on(Events.InteractionCreate, async interaction => {
+    console.log(`Interaction: ${interaction.customId || interaction.commandName} by ${interaction.user.username} in ${interaction.guild.name} @ ${new Date().toISOString()}`)
+    let action;
+    if (interaction.isButton()) {
+        const customId = interaction.customId
 
-//         if (customId == "auth") action = auth
-//         if (customId == "post") action = post
-//         if (customId == "unlink") action = unlink
+        if (customId == "auth") action = auth
+        if (customId == "post") action = post
+        if (customId == "unlink") action = unlink
 
-//         if (customId == "check") action = check
+        if (customId == "check") action = check
 
-//         if (customId == "riddle-start") action = riddleStart
-//         if (customId == "riddle-generate") action = riddleGenerate
-//         if (customId == "riddle-submit") action = riddleSubmit
+        if (customId == "riddle-start") action = riddleStart
+        if (customId == "riddle-generate") action = riddleGenerate
+        if (customId == "riddle-submit") action = riddleSubmit
 
-//         if (customId == "riddle-answer") action = riddleAnswer
-//         if (customId == "riddle-show") action = riddleShow
+        if (customId == "riddle-answer") action = riddleAnswer
+        if (customId == "riddle-show") action = riddleShow
 
-//         if (customId == "check-rank") action = checkRank
+        if (customId == "check-rank") action = checkRank
 
-//         if (customId == "submit-op1") action = submitOp1
-//         if (customId == "check-op1") action = checkOp1
+        if (customId == "submit-op1") action = submitOp1
+        if (customId == "check-op1") action = checkOp1
 
-//         } else if (interaction.isCommand()) {
-//         if (interaction.commandName == "init") action = init
-//         if (interaction.commandName == "init2") action = init2
-//         if (interaction.commandName == "init3") action = init3
-//         if (interaction.commandName == "init4") action = init4
-//         if (interaction.commandName == "init5") action = init5
+        } else if (interaction.isCommand()) {
+        if (interaction.commandName == "init") action = init
+        if (interaction.commandName == "init2") action = init2
+        if (interaction.commandName == "init3") action = init3
+        if (interaction.commandName == "init4") action = init4
+        if (interaction.commandName == "init5") action = init5
 
-//         if (interaction.commandName == "xp") action = xp
-//         if (interaction.commandName == "rank") action = rank
+        if (interaction.commandName == "xp") action = xp
+        if (interaction.commandName == "rank") action = rank
 
-//     }
+    }
 
-//     if (!action) return
+    if (!action) return
 
-//     try {
-//         await action.execute(interaction)
-//     } catch (e) {
-//         console.error(e)
-//         interaction.followUp({
-//             content: "An error occurred",
-//             ephemeral: true
-//         }).catch(() => { })
-//     }
+    try {
+        await action.execute(interaction)
+    } catch (e) {
+        console.error(e)
+        interaction.followUp({
+            content: "An error occurred",
+            ephemeral: true
+        }).catch(() => { })
+    }
 
-// })
+})
 
 
 client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
