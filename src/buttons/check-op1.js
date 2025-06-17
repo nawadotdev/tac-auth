@@ -1,6 +1,5 @@
 import { EmbedBuilder } from "discord.js"
 import UserWallet from "../models/userWallet.js"
-import { EmbedBuilder } from "discord.js"
 
 const winners = [
     '1234',
