@@ -30,7 +30,7 @@ export const    checkPost = async (auth, link) => {
     const username = entry.content?.itemContent?.tweet_results?.result?.core?.user_results?.result?.legacy?.screen_name
     const quoted = entry.content?.itemContent?.tweet_results?.result?.quoted_status_result?.result?.rest_id
 
-    if (!username || username !== auth.username) {
+    if (!username || username.toLowerCase() !== auth.username.toLowerCase()) {
         console.log(`Invalid username ${username} != ${auth.username}`)
         return false
     }
