@@ -10,10 +10,10 @@ export default {
         try{
             
             const row = new ActionRowBuilder().addComponents(
-                new ButtonBuilder()
-                    .setCustomId("submit-op1")
-                    .setLabel("Submit Wallet Address")
-                    .setStyle(ButtonStyle.Success),
+                // new ButtonBuilder()
+                //     .setCustomId("submit-op1")
+                //     .setLabel("Submit Wallet Address")
+                //     .setStyle(ButtonStyle.Success),
                 new ButtonBuilder()
                     .setCustomId("check-op1")
                     .setLabel("Check Wallet Address")
