@@ -1,4 +1,6 @@
+import { EmbedBuilder } from "discord.js"
 import UserWallet from "../models/userWallet.js"
+import { EmbedBuilder } from "discord.js"
 
 const winners = [
     '1234',
@@ -219,8 +221,26 @@ export default {
             })
         } else {
             const isWinner = winners.includes(userWallet.walletAddress)
+            let embed;
+            if (isWinner) {
+                embed = new EmbedBuilder()
+                    .setColor("#0099ff")
+                    .setTitle("Congrats! 🎉")
+                    .setDescription(`Congrats! Your wallet address ${userWallet.walletAddress} has won the raffle and First Force mint pass has been sent to the same address. 
+
+You can mint during the gauranteed phase.`)
+                    .setFooter({ text: "TAC.build ~ nawadotdev" })
+            } else {
+                embed = new EmbedBuilder()
+                    .setColor("#0099ff")
+                    .setTitle("Sorry! 🎉")
+                    .setDescription(
+                        `Your wallet address ${userWallet.walletAddress} did not win the raffle. Please try during the FCFS (check eligibility on the first force website and regsiter wallet) or public phase.`
+                    )
+                    .setFooter({ text: "TAC.build ~ nawadotdev" })
+            }
             return interaction.editReply({
-                content: `Your wallet address is \`${userWallet.walletAddress}\`\nYou are ${isWinner ? "a winner" : "not a winner"}`,
+                embeds: [embed],
                 ephemeral: true
             })
         }
